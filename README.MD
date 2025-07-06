@@ -12,10 +12,15 @@ It provides a visual tree-based interface that allows you to:
 ## Captures
 
 **FontRegistryManager**
+
 ![](asserts/main.png)
+
 **Font Files in Explorer**
+
 ![](asserts/tree.png)
+
 **Font Registry Item**
+
 ![](asserts/registry.png)
 
 
