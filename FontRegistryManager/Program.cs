@@ -20,12 +20,13 @@ public class FontManagerForm : Form
     private const string RegistryBase = "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Fonts";
     private bool expandedAll = false;
 
-    // 正则表达式匹配字体文件
+    // Regex to match font files
     private static readonly Regex fontFileRegex = new Regex(@"\.(ttf|otf|ttc)$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
     public FontManagerForm()
     {
         this.Text = "Font Registry Manager";
+        this.Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
         this.Width = 800;
         this.Height = 600;
 
@@ -38,54 +39,54 @@ public class FontManagerForm : Form
             AutoSize = true
         };
 
-        refreshButton = new Button { Text = "刷新注册表状态", AutoSize = true };
+        refreshButton = new Button { Text = "Refresh Registry Status", AutoSize = true };
         refreshButton.Click += (s, e) =>
         {
             fileTree.Nodes.Clear();
             LoadFontTree();
             ExpandToBeforeLeafFolders(fileTree.Nodes);
             expandedAll = false;
-            expandToggleButton.Text = "展开全部";
+            expandToggleButton.Text = "Expand All";
         };
 
-        expandToggleButton = new Button { Text = "展开全部", AutoSize = true };
+        expandToggleButton = new Button { Text = "Expand All", AutoSize = true };
         expandToggleButton.Click += (s, e) =>
         {
             if (expandedAll)
             {
                 fileTree.CollapseAll();
                 ExpandToBeforeLeafFolders(fileTree.Nodes);
-                expandToggleButton.Text = "展开全部";
+                expandToggleButton.Text = "Expand All";
                 expandedAll = false;
             }
             else
             {
                 fileTree.ExpandAll();
-                expandToggleButton.Text = "折叠到目录层";
+                expandToggleButton.Text = "Collapse to Directory Level";
                 expandedAll = true;
             }
         };
 
-        configButton = new Button { Text = "设置字体目录", AutoSize = true };
+        configButton = new Button { Text = "Set Font Directory", AutoSize = true };
         configButton.Click += (s, e) =>
         {
             using (var dialog = new FolderBrowserDialog())
             {
-                dialog.Description = "请选择字体目录";
+                dialog.Description = "Please select the font directory";
                 dialog.SelectedPath = fontRoot;
 
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     fontRoot = dialog.SelectedPath;
                     SaveFontRootToConfig(fontRoot);
-                    MessageBox.Show("字体目录已保存，目录树已刷新。", "设置成功", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Font directory saved and tree refreshed.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    // 立即刷新目录树
+                    // Refresh immediately
                     fileTree.Nodes.Clear();
                     LoadFontTree();
                     ExpandToBeforeLeafFolders(fileTree.Nodes);
                     expandedAll = false;
-                    expandToggleButton.Text = "展开全部";
+                    expandToggleButton.Text = "Expand All";
                 }
             }
         };
@@ -151,7 +152,7 @@ public class FontManagerForm : Form
         DirectoryInfo rootDir = new DirectoryInfo(fontRoot);
         if (!rootDir.Exists)
         {
-            MessageBox.Show($"字体目录不存在：{fontRoot}", "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show($"Font directory does not exist: {fontRoot}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return;
         }
         TreeNode rootNode = CreateDirectoryNode(rootDir, regFontPaths);
@@ -306,7 +307,7 @@ public class FontManagerForm : Form
 
     private void DeleteRegistryKeyForDirectory(TreeNode node)
     {
-        // 已不再使用子键，无需删除目录项
+        // No need to delete directory key as subkeys are not used anymore
     }
 
     private void UpdateRegistryForFont(string fontPath, bool add)
@@ -364,7 +365,7 @@ public class FontManagerForm : Form
             }
             else
             {
-                node.Collapse(); // 不展开字体文件节点
+                node.Collapse(); // Do not expand font file nodes
             }
         }
     }
