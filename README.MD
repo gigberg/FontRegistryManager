@@ -66,7 +66,9 @@ dotnet publish -c Release
 ## Acknowledgements
 
 [ContextMenuManager](https://github.com/BluePointLilac/ContextMenuManager)
+
 [FontBase](https://forum.fontba.se/t/ability-to-keep-font-activated-even-if-fonbase-is-exited/1672)
+
 [Best font manager for 2025 for windows 11?](https://www.reddit.com/r/typography/comments/1i3h9u5/comment/m7mzztu/)
 
 <!-- ## Donate
