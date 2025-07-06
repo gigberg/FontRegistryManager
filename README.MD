@@ -10,9 +10,9 @@ It provides a visual tree-based interface that allows you to:
 - Automatically synchronize font file structure with registry entries.
 
 ## Captures
-![FontRegistryManager](asserts/main.png){: width="150px" height="150px"}
-![Font Files in Explorer](asserts/tree.png){: width="150px" height="150px"}
-![Font Registry](asserts/registry.png){: width="150px" height="150px"}
+![FontRegistryManager](asserts/main.png|height=200)
+![Font Files in Explorer](asserts/tree.png|height=200)
+![Font Registry](asserts/registry.png|height=200)
 
 
 ## Requirements
@@ -64,4 +64,4 @@ dotnet publish -c Release
 
 This program is completely free. If you find it helpful, you can make a donation by scanning the QR code below (WeChat) to support the project.
 
-![Buy me a coffee](asserts/donate-wechat.png){: width="150px" height="150px"}
+![Buy me a coffee](asserts/donate-wechat.png=250x250)
